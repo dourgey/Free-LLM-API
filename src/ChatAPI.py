@@ -186,12 +186,14 @@ class OpenAIStyleChatAPI(ChatAPI):
         }
 
         now = time.time()
-
         response = requests.request("POST", self.url, headers=headers, data=payload)
+        status = response.status_code
         response = response.text
         response = json.loads(response)
-        response = response['choices'][0]['message']['content']
+        if status != 200:
+            print(response)
 
+        response = response['choices'][0]['message']['content']
         history.append({"role": "assistant", "content": response})
 
         time_used = time.time() - now
