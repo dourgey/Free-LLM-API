@@ -177,8 +177,10 @@ class OpenAIStyleChatAPI(ChatAPI):
 
         return payload
 
-    def chat(self, model, query, history=[]):
+    def chat(self, model, query, history=None):
         assert model in self.model_list, "model should in " + [x for x in self.model_list]
+        if not history:
+            history = []
         payload = self._get_payload(model, query, history)
         headers = { 
             'Content-Type': 'application/json',
