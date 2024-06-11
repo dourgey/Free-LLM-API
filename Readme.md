@@ -60,6 +60,11 @@
 | [火山（字节跳动）](https://console.volcengine.com/ark)       |                      `Doubao-lite-128k`                      | 0.8元/输入，1 元/输出，**赠送至高 5 亿 token**               |
 | [火山（字节跳动）](https://console.volcengine.com/ark)       |              `Doubao-pro-4k`，`Doubao-pro-32k`               | 0.8元/输入，2 元/输出，**赠送至高 5 亿 token**               |
 | [火山（字节跳动）](https://console.volcengine.com/ark)       |                      `Doubao-pro-128k`                       | 5元/输入，9 元/输出，**赠送至高 5 亿 token**                 |
+| [紫东太初](https://ai-maas.wair.ac.cn/)                      |                         `taichu_llm`                         | 2元，**赠送 20 元体验金**                                    |
+| [星火（科大讯飞）](https://console.xfyun.cn/services/)       |                         `spark_lite`                         | **免费**                                                     |
+| [星火（科大讯飞）](https://console.xfyun.cn/services/)       |                       `spark 3.5 Max`                        | **可免费领取 200w  token**                                   |
+| [星火（科大讯飞）](https://console.xfyun.cn/services/)       |                         `spark pro`                          | **可免费领取 500w token**                                    |
+
 # 备注
 
 * 飞书的模型名称需要手动进行设置 https://console.volcengine.com/ark
@@ -69,10 +74,10 @@
   1. 接入点下方以 ep- 开头的字符串即为模型名称
   1. 在开通管理页面中，可以开通 5 亿免费 token
 
+
 ## TODO
 
 * [ ] 限流、调用失败 Exception 处理
 * [ ] FunctionCall 模式调用
-* [ ] 智谱 Batch 接口
 * [ ] 测试百川接口
 * [ ] 多模态模型适配

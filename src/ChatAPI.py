@@ -1,19 +1,18 @@
 import requests
 import json
 import time
-import copy
-import enum
+from sparkai.llm.llm import ChatSparkLLM, ChunkPrintHandler
+from sparkai.core.messages import ChatMessage
 
 # pip install -i https://mirrors.tencent.com/pypi/simple/ --upgrade tencentcloud-sdk-python
 from tencentcloud.common import credential
 from tencentcloud.common.profile.client_profile import ClientProfile
 from tencentcloud.common.profile.http_profile import HttpProfile
-from tencentcloud.common.exception.tencent_cloud_sdk_exception import TencentCloudSDKException
 from tencentcloud.hunyuan.v20230901 import hunyuan_client, models
 
 
 class ChatAPI:
-    def __init__(self, api_key, secret_key=None, system_prompt="", temperature=0.9, top_p=0.7, penalty_score=1.14, max_tokens=None):
+    def __init__(self, api_key, secret_key=None, appid=None, system_prompt="", temperature=0.9, top_p=0.7, penalty_score=1.1, repetition_penalty=1.14, max_tokens=None):
         self.api_key = api_key
         self.secret_key = secret_key
         self.system_prompt = system_prompt
@@ -81,7 +80,9 @@ class BaiduChatAPI(ChatAPI):
         return self._access_token
 
 
-    def chat(self, model, query, history=[]):
+    def chat(self, model, query, history=None):
+        if not history:
+            history = []
         assert model in self.model_list, "model should in " + [x for x in self.model_list]
         payload = self._get_payload(query, history)
         headers = { 
@@ -132,7 +133,9 @@ class TencentChatAPI(ChatAPI):
         return payload
 
 
-    def chat(self, model, query, history=[]):
+    def chat(self, model, query, history=None):
+        if not history:
+            history = []
         assert model in self.model_list, "model should in " + [x for x in self.model_list]
         httpProfile = HttpProfile()
         httpProfile.endpoint = "hunyuan.tencentcloudapi.com"
@@ -292,3 +295,50 @@ class LarkChatAPI(OpenAIStyleChatAPI):
         self.url = "https://ark.cn-beijing.volces.com/api/v3/chat/completions"
 
 
+# 科大讯飞星火
+class SparkChatAPI(ChatAPI):
+
+    def _process_others(self):
+        self.model_list = {
+            'spark-lite': 'ws(s)://spark-api.xf-yun.com/v1.1/chat',
+            'spark-3.5-max': 'ws(s)://spark-api.xf-yun.com/v3.5/chat',
+            'spark-pro': 'ws(s)://spark-api.xf-yun.com/v3.1/chat',
+            'spark-v2.0': 'ws(s)://spark-api.xf-yun.com/v2.1/chat'
+        }
+
+        self.model_domain = {
+            "spark-lite": "general",
+            "spark-3.5-max": "generalv3.5",
+            "spark-pro": "generalv3",
+            "spark-v2.0": "generalv2"
+        }
+
+    def chat(self, model, query, history=None):
+        if not history:
+            history = []
+        spark = ChatSparkLLM(
+            spark_api_url=self.model_list[model],
+            spark_app_id=self.appid,
+            spark_api_key=self.api_key,
+            spark_api_secret=self.secret_key,
+            spark_llm_domain=self.model_domain[model],
+            streaming=False,
+        )
+        messages = [ChatMessage(
+            role=x['role'],
+            content=x['content']
+        ) for x in history]
+
+        messages.append(ChatMessage(
+            role="user",
+            content=query
+        ))
+
+        handler = ChunkPrintHandler()
+        now = time.time()
+        a = spark.generate([messages], callbacks=[handler])
+        resp = a.generations[0][0].text
+        time_used = time.time() - now
+        history.append({"role": "user", "content": query})
+        history.append({"role": "assistant", "content": resp})
+        return resp, history, time_used

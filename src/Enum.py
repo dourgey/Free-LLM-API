@@ -84,4 +84,4 @@ class MODEL:
         BAICHUAN3_TURBO = "Baichuan3-Turbo"
         BAICHUAN3_TURBO_128K = "Baichuan3-Turbo-128k"
         BAICHUAN2_TURBO = "Baichuan2-Turbo"
-        BAICHUAN2_TURBO_192K = "Baichuan2-Turbo-192k"
+        BAICHUAN2_TURBO_192K = "Baichuan2-Turbo-192k"    class SPARK:        SPARK_LITE = 'spark-lite'        SPARK_35_MAX = 'spark-3.5-max'        SPARK_PRO = 'spark-pro'        SPARK_V2 = 'spark-v2.0'
