@@ -26,6 +26,8 @@ class APIKEY:
 
     LARK_API_KEY = None
 
+    TAICHU_API_KEY = None
+
     SPARK_API_KEY = None
     SPARK_APPID = None
     SPARK_SCRIPT_KEY = None
@@ -52,6 +54,7 @@ class MODEL:
     class ZHIPU:
         GLM_3_TURBO = "glm-3-turbo"
         GLM_4 = "glm-4"
+        GLM_4_FLASH = "glm-4-flash"
     
     class YI:
         YI_SPARK = "yi-spark"
@@ -87,4 +90,15 @@ class MODEL:
         BAICHUAN3_TURBO = "Baichuan3-Turbo"
         BAICHUAN3_TURBO_128K = "Baichuan3-Turbo-128k"
         BAICHUAN2_TURBO = "Baichuan2-Turbo"
-        BAICHUAN2_TURBO_192K = "Baichuan2-Turbo-192k"    class SPARK:        SPARK_LITE = 'spark-lite'        SPARK_35_MAX = 'spark-3.5-max'        SPARK_PRO = 'spark-pro'        SPARK_V2 = 'spark-v2.0'
+        BAICHUAN2_TURBO_192K = "Baichuan2-Turbo-192k"
+
+
+    class TAICHU:
+        TAICHU2 = "taichu_llm"
+
+    class SPARK:
+        SPARK_LITE = 'spark-lite'
+        SPARK_35_MAX = 'spark-3.5-max'
+        SPARK_PRO = 'spark-pro'
+        SPARK_V2 = 'spark-v2.0'
+
