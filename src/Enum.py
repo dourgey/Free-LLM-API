@@ -26,6 +26,9 @@ class APIKEY:
 
     LARK_API_KEY = None
 
+    SPARK_API_KEY = None
+    SPARK_APPID = None
+    SPARK_SCRIPT_KEY = None
 
 
 class MODEL:
