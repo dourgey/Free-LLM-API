@@ -178,7 +178,7 @@ class OpenAIStyleChatAPI(ChatAPI):
         return payload
 
     def chat(self, model, query, history=None):
-        assert model in self.model_list, "model should in " + [x for x in self.model_list]
+        # assert model in self.model_list, "model should in " + [x for x in self.model_list]
         if not history:
             history = []
         payload = self._get_payload(model, query, history)
@@ -210,7 +210,8 @@ class ZhiPuChatAPI(OpenAIStyleChatAPI):
         # https://open.bigmodel.cn/dev/api#
         self.model_list = [
             'glm-3-turbo',
-            'glm-4'
+            'glm-4',
+            'glm-4-flash',
         ]
         
 
@@ -285,5 +286,9 @@ class BaichuanChatAPI(OpenAIStyleChatAPI):
             "Baichuan2-Turbo-192k"
         ]
 
+# 字节跳动，后付费
+class LarkChatAPI(OpenAIStyleChatAPI):
+    def _process_others(self):
+        self.url = "https://ark.cn-beijing.volces.com/api/v3/chat/completions"
 
 

@@ -24,6 +24,7 @@ class APIKEY:
 
     MOONSHOT_API_KEY = None
 
+    LARK_API_KEY = None
 
 
 

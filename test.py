@@ -20,8 +20,18 @@ if __name__ == '__main__':
     # chatbot = QwenChatAPI(APIKEY.QWEN_API_KEY)
     # model = MODEL.QWEN.QWEN1_5_0_5B_CHAT
 
-    chatbot = MoonshotChatAPI(APIKEY.MOONSHOT_API_KEY)
-    model = MODEL.MOONSHOT.MOONSHOT_V1_8K
+    # chatbot = MoonshotChatAPI(APIKEY.MOONSHOT_API_KEY)
+    # model = MODEL.MOONSHOT.MOONSHOT_V1_8K
+
+    # 飞书的模型名称需要手动进行设置
+    # https://console.volcengine.com/ark
+    # 1. 左侧菜单找到 API KEY 管理, 创建 API KEY
+    # 2. 左侧菜单找到开通管理, 对需要的模型进行开通
+    # 3. 左侧菜单找到模型推理, 针对每个需要的模型创建模型推理接入点
+    # 4. 接入点下方以 ep- 开头的字符串即为模型名称
+    # 5. 在开通管理页面中，可以开通 5 亿免费 token
+    chatbot = LarkChatAPI(APIKEY.LARK_API_KEY)
+    model = None
 
     query = [
         '爷爷和奶奶可以结婚吗',

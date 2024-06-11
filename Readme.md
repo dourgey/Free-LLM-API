@@ -56,6 +56,18 @@
 | [阿里云](https://dashscope.console.aliyun.com/overview)                       |                                `qwen-1.8b-chat`                                | **限时免费**                                                                                                                                                            |
 | [阿里云](https://dashscope.console.aliyun.com/overview)                       |                              `qwen1.5-0.5b-chat`                              | **限时免费**                                                                                                                                                            |
 | [月之暗面](https://platform.moonshot.cn/console/info)                      |                                `moonshot-v1-8k`                                | 12元，**注册赠送 15元**                                                                                                                                                 |
+| [火山（字节跳动）](https://console.volcengine.com/ark)       |             `Doubao-lite-4k`，`Doubao-lite-32k`              | 0.3元/输入，0.6 元/输出，**赠送至高 5 亿 token**             |
+| [火山（字节跳动）](https://console.volcengine.com/ark)       |                      `Doubao-lite-128k`                      | 0.8元/输入，1 元/输出，**赠送至高 5 亿 token**               |
+| [火山（字节跳动）](https://console.volcengine.com/ark)       |              `Doubao-pro-4k`，`Doubao-pro-32k`               | 0.8元/输入，2 元/输出，**赠送至高 5 亿 token**               |
+| [火山（字节跳动）](https://console.volcengine.com/ark)       |                      `Doubao-pro-128k`                       | 5元/输入，9 元/输出，**赠送至高 5 亿 token**                 |
+# 备注
+
+* 飞书的模型名称需要手动进行设置 https://console.volcengine.com/ark
+  1. 左侧菜单找到 API KEY 管理, 创建 API KEY
+  1. 左侧菜单找到开通管理, 对需要的模型进行开通
+  1. 左侧菜单找到模型推理, 针对每个需要的模型创建模型推理接入点
+  1. 接入点下方以 ep- 开头的字符串即为模型名称
+  1. 在开通管理页面中，可以开通 5 亿免费 token
 
 ## TODO
 
