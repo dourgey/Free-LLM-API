@@ -32,6 +32,8 @@ class APIKEY:
     SPARK_APPID = None
     SPARK_SCRIPT_KEY = None
 
+    SILICONCLOUD_API_KEY = None
+
 
 class MODEL:
     class BAIDU:
@@ -101,4 +103,30 @@ class MODEL:
         SPARK_35_MAX = 'spark-3.5-max'
         SPARK_PRO = 'spark-pro'
         SPARK_V2 = 'spark-v2.0'
+
+    class SILICONCLOUD:
+        DEEPSEEK_V2_CHAT = 'deepseek-ai/deepseek-v2-chat'
+        DEEPSEEK_LLM_67B_CHAT = 'deepseek-ai/deepseek-llm-67b-chat'
+        QWEN2_72B_CHAT = 'alibaba/Qwen2-72B-Instruct'
+        QWEN2_7B_CHAT = 'alibaba/Qwen2-7B-Instruct'
+        QWEN2_57B_A14B_CHAT = 'alibaba/Qwen2-57B-A14B-Instruct'
+        QWEN1_5_110B_CHAT = 'alibaba/Qwen1.5-110B-Chat'
+        QWEN1_5_32B_CHAT = 'alibaba/Qwen1.5-32B-Chat'
+        QWEN1_5_14B_CHAT = 'alibaba/Qwen1.5-14B-Chat'
+        QWEN1_5_7B_CHAT = 'alibaba/Qwen1.5-7B-Chat'
+        YI1_5_34B_CHAT = '01-ai/Yi-1.5-34B-Chat'
+        YI1_5_9B_CHAT = '01-ai/Yi-1.5-9B-Chat'
+        YI1_5_6B_CHAT = '01-ai/Yi-1.5-6B-Chat'
+        CHATGLM3_6B = 'zhipuai/chatglm3-6B'
+        CHATGLM4_9B_CHAT = 'zhipuai/glm4-9B-chat'
+        MIXTRAL_8X7B_INSTRUCT_V0_1 = 'mixtralai/Mixtral-8x7B-Instruct-v0.1'
+        MIXTRAL_8X7B_INSTRUCT_V0_2 = 'mixtralai/Mistral-7B-Instruct-v0.2'
+        GEMMA_7B = 'google/gemma-7b-it'
+        GEMMA_2B = 'google/gemma-2b-it'
+
+
+
+
+
+
 

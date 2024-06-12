@@ -15,10 +15,12 @@ class ChatAPI:
     def __init__(self, api_key, secret_key=None, appid=None, system_prompt="", temperature=0.9, top_p=0.7, penalty_score=1.1, repetition_penalty=1.14, max_tokens=None):
         self.api_key = api_key
         self.secret_key = secret_key
+        self.appid = appid
         self.system_prompt = system_prompt
         self.temperature = temperature
         self.top_p = top_p
         self.penalty_score = penalty_score
+        self.repetition_penalty = repetition_penalty
         self.max_tokens = max_tokens
 
         self._process_others()
@@ -295,6 +297,36 @@ class LarkChatAPI(OpenAIStyleChatAPI):
         self.url = "https://ark.cn-beijing.volces.com/api/v3/chat/completions"
 
 
+class TaichuChatAPI(ChatAPI):
+
+    def _process_others(self):
+        self.url = "https://ai-maas.wair.ac.cn/maas/v1/model_api/invoke"
+
+    def _get_payload(self, model, query, history):
+
+        payload = {
+            "api_key": self.api_key,
+            "model_code": model,
+            "question": query,
+            # "context": history,
+            # "temperature": self.temperature,
+            # "top_p": self.top_p,
+            # "repetition_penalty": self.repetition_penalty,
+            # "prefix": self.system_prompt
+        }
+
+        payload = json.dumps(payload)
+        return payload
+    def chat(self, model, query, history=None):
+        if not history:
+            history = []
+        payload = self._get_payload(model, query, history)
+
+        r = requests.post(self.url, json=payload)
+        # r.raise_for_status()
+        return r.json()
+
+
 # 科大讯飞星火
 class SparkChatAPI(ChatAPI):
 
@@ -342,3 +374,21 @@ class SparkChatAPI(ChatAPI):
         history.append({"role": "user", "content": query})
         history.append({"role": "assistant", "content": resp})
         return resp, history, time_used
+
+
+class SiliconCloudChatAPI(OpenAIStyleChatAPI):
+
+    def _process_others(self):
+        self.url = "https://api.siliconflow.cn/v1/chat/completions"
+
+
+if __name__ == '__main__':
+    from src.Enum import *
+    # chatbot = TaichuChatAPI(APIKEY.TAICHU_API_KEY)
+    # print(chatbot.chat(MODEL.TAICHU.TAICHU2, "你好"))
+
+    # chatbot = SparkChatAPI(APIKEY.SPARK_API_KEY, APIKEY.SPARK_SCRIPT_KEY, APIKEY.SPARK_APPID)
+    # print(chatbot.chat(MODEL.SPARK.SPARK_LITE, " 我叫什么名字？", history=[{"role": "user", "content": "你好,我叫 kimi"}, {"role": "assistant", "content": "你好！有什么我可以帮助你的吗？"}]))
+
+    chatbot = SiliconCloudChatAPI(APIKEY.SILICONCLOUD_API_KEY)
+    print(chatbot.chat("alibaba/Qwen2-72B-Instruct", "你好", history=[]))
